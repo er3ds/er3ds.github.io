@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ER3DS: elastic registration and shape statistics for 3D surfaces</title>
+<meta name="description" content="ER3DS registers sets of 3D surfaces with elastic methods and computes the mean shape, principal components, clusters, regressions, geodesics and videos. Download, install and learn the workflow.">
+<meta name="theme-color" content="#0e2a63">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon_32.png">
+<link rel="apple-touch-icon" href="assets/img/icon_256.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ER3DS: elastic registration and shape statistics for 3D surfaces">
+<meta property="og:description" content="ER3DS registers sets of 3D surfaces with elastic methods and computes the mean shape, principal components, clusters, regressions, geodesics and videos. Download, install and learn the workflow.">
+<meta property="og:url" content="https://er3ds.github.io/er3ds/">
+<meta property="og:image" content="https://er3ds.github.io/er3ds/assets/img/og-image.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<!-- CHROME:HEADER:START -->
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="ER3DS, home page"><img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="139" height="54"></a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="workflow.html">Workflow</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="citations.html">Citations</a></li>
+        <li><a class="nav-cta" href="download.html">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- CHROME:HEADER:END -->
+<main id="main">
+
+<div class="hero">
+  <div class="container">
+    <p class="eyebrow">Software for statistical shape analysis</p>
+    <h1>Elastic registration and <span class="accent">shape statistics</span> for 3D surfaces</h1>
+    <p class="lead">ER3DS finds, for every surface in a set, the point-to-point correspondence with all the others. With that correspondence it computes the mean shape, the principal ways in which the shapes vary, clusters, regressions, time trends, and paths and videos between shapes. One window for the whole workflow, and the same engine on the command line.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg> Download ER3DS <small data-release="version"></small></a>
+      <a class="btn btn-light" href="workflow.html">See the workflow</a>
+    </div>
+    <p class="hero-note">For Windows, macOS and Linux, with Python 3.9 or newer. So far the installation has been tested on Linux only (details on the download page).</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Four kinds of surfaces</h2>
+      <p>You choose the kind of surface at the top of the window, and every tab adapts. Count the handles of your meshes: that decides the type.</p>
+    </div>
+    <div class="grid grid-4">
+      <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="3.6" ry="9"/></svg></div><h3>Genus 0</h3><p>Closed surfaces without a handle: most teeth, many bones. Each mesh is mapped to a sphere.</p></a>
+      <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6.5"/><ellipse cx="12" cy="12.6" rx="4.2" ry="2"/></svg></div><h3>Genus 1</h3><p>Closed surfaces with exactly one handle: a ring, a vertebra with its spinal canal. Mapped to a flat torus.</p></a>
+      <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v18M3 12h18"/></svg></div><h3>Disk</h3><p>Open surfaces with one boundary and no handle: a face, a tooth cut flat. Mapped to a disk.</p></a>
+      <a class="card" href="workflow.html#surface-types"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-2-3 0-8 5-8 2 0 3 1 5 1 3 0 5 2 4 5-1 4-5 6-8 5-3-1-4-2-6-3z"/><circle cx="14" cy="12" r="1.8"/></svg></div><h3>Any surface</h3><p>Everything else: several boundaries, several pieces, several handles. Nothing is parameterized.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-soft">
+  <div class="container">
+    <div class="section-head">
+      <h2>From a folder of meshes to statistics</h2>
+      <p>The first five tabs of the window are the steps that depend on the surface type. Once the shapes are registered, the remaining tabs work the same for every type.</p>
+    </div>
+    <p class="flow-label">The steps (tabs 1 to 5)</p>
+    <ol class="flow">
+      <li><a class="box" href="workflow.html#step-1"><span class="n">1</span>Preprocessing</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="workflow.html#step-2"><span class="n">2</span>Alignment</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="workflow.html#step-3"><span class="n">3</span>Parameterization</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="workflow.html#step-4"><span class="n">4</span>Registration</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="workflow.html#step-5"><span class="n">5</span>Register New Shapes</a></li>
+    </ol>
+    <p class="flow-label">Then, for every surface type</p>
+    <ol class="flow">
+      <li><a class="box shared" href="workflow.html#step-6"><span class="n"></span>PCA</a></li>
+      <li><a class="box shared" href="workflow.html#step-7"><span class="n"></span>Shape Clustering</a></li>
+      <li><a class="box shared" href="workflow.html#step-7"><span class="n"></span>Shape Regression</a></li>
+      <li><a class="box shared" href="workflow.html#step-7"><span class="n"></span>Time Models</a></li>
+      <li><a class="box shared" href="workflow.html#step-8"><span class="n"></span>Geodesics</a></li>
+      <li><a class="box shared" href="workflow.html#step-8"><span class="n"></span>Videos</a></li>
+    </ol>
+    <p style="margin-top:1.6rem"><a class="btn btn-outline" href="workflow.html">Read the overview of the steps</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>What you get</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div><h3>Meshes in correspondence</h3><p>Registered meshes (PLY or OBJ, colored) in which vertex <em>k</em> is the same location on every shape, and the mean shape.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M8 16l4-5 3 3 5-7"/></svg></div><h3>Statistics</h3><p>Principal components, distances to the mean, clustering with several methods, regression of shape on a measurement or the reverse, and time models.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6h9.2M6 8.2l5 7.6M18 8.2l-5 7.6"/></svg></div><h3>Figures and tables</h3><p>PNG figures and CSV tables for every step, and the results as NumPy arrays for your own scripts.</p></div>
+      <div class="card"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></div><h3>Paths and videos</h3><p>The shortest path between two shapes, and videos, GIFs and images of the modes of variation and of the paths.</p></div>
+    </div>
+    <p class="muted small" style="margin-top:1.2rem">Everything runs on your own computer. Your meshes are never modified: the results go into a separate <code>er3ds_output</code> folder, which by default is inside your meshes folder and can be placed anywhere you choose.</p>
+  </div>
+</section>
+
+<section class="section-soft">
+  <div class="container">
+    <div class="section-head">
+      <h2>Example output</h2>
+      <p>Real output of the program for three vertebra meshes. Three shapes are enough to show what the results look like, not to draw conclusions: a real study needs many more.</p>
+    </div>
+    <div class="grid grid-figs">
+      <figure class="figure">
+        <a class="zoom" href="assets/img/figures/registration-before-after.png" aria-label="Open the registration figure at full size"><img src="assets/img/figures/registration-before-after.png" width="847" height="803" loading="lazy" alt="Three vertebra meshes in three rows. The left column shows the mean shape in grey. The middle column shows each vertebra before registration, colored by how much it differs from the mean at every point, with large differences in dark red and purple. The right column shows the same vertebrae after registration, almost uniformly pale, meaning they now match the mean closely."></a>
+        <figcaption><strong>Registration.</strong> Each vertebra (rows) against the mean shape (left). The color shows how much the shape differs from the mean at every point: before registration (middle, best rotation only) and after (right). The distance to the mean falls from 0.44, 1.36 and 1.26 to 0.34, 0.34 and 0.33.</figcaption>
+      </figure>
+      <figure class="figure">
+        <a class="zoom" href="assets/img/figures/principal-modes.png" aria-label="Open the principal modes figure at full size"><img src="assets/img/figures/principal-modes.png" width="1211" height="454" loading="lazy" alt="Two rows of five vertebra shapes. Each row shows one principal component of shape variation, from minus two standard deviations through the mean shape to plus two standard deviations, colored by displacement from the mean along the surface normal, from blue for inward to red for outward."></a>
+        <figcaption><strong>Modes of variation.</strong> The first two principal components of the same three vertebrae, from &minus;2 to +2 standard deviations around the mean. Color is the displacement along the surface normal (red outward, blue inward).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Get started</h2>
+    </div>
+    <div class="grid grid-3">
+      <a class="card" href="download.html"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></div><h3>1. Download and install</h3><p>One zip file, installed with pip into its own environment. Instructions for Windows, macOS and Linux.</p></a>
+      <a class="card" href="workflow.html"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6h9.2M6 8.2l5 7.6M18 8.2l-5 7.6"/></svg></div><h3>2. Learn the workflow</h3><p>The steps from a folder of meshes to the mean, the modes of variation and the comparisons, with pictures.</p></a>
+      <a class="card" href="downloads/ER3DS_manual.pdf" data-release-link="manual"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6"/></svg></div><h3>3. Read the manual</h3><p>Every tab and every setting explained, with recipes and troubleshooting (PDF<span data-release="manual-size" data-prefix=", "></span>).</p></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- CHROME:FOOTER:START -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="113" height="44">
+        <p>Elastic registration and statistical shape analysis of 3D surfaces.</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="download.html">Download and install</a></li>
+          <li><a href="workflow.html">The workflow</a></li>
+          <li><a href="tutorials.html">Video tutorials</a></li>
+          <li><a href="citations.html">Citations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a href="downloads/ER3DS_manual.pdf" data-release-link="manual">Manual (PDF)</a></li>
+          <li><a href="download.html" data-site="github" hidden>Source on GitHub</a></li>
+          <li><a href="download.html" data-site="issues" hidden>Report a problem</a></li>
+          <li><a href="download.html" data-site="contact" hidden>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">&copy; <span data-year>2026</span> ER3DS. <span data-site-text="license_note" hidden></span></p>
+  </div>
+</footer>
+<!-- CHROME:FOOTER:END -->
+</body>
+</html>

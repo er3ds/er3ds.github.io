@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download and install ER3DS</title>
+<meta name="description" content="Download the ER3DS zip and install it with pip on Windows, macOS or Linux. Requirements, step-by-step commands, a check of the installation, and troubleshooting.">
+<meta name="theme-color" content="#0e2a63">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon_32.png">
+<link rel="apple-touch-icon" href="assets/img/icon_256.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Download and install ER3DS">
+<meta property="og:description" content="Download the ER3DS zip and install it with pip on Windows, macOS or Linux. Requirements, step-by-step commands, a check of the installation, and troubleshooting.">
+<meta property="og:url" content="https://er3ds.github.io/er3ds/download.html">
+<meta property="og:image" content="https://er3ds.github.io/er3ds/assets/img/og-image.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<!-- CHROME:HEADER:START -->
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="ER3DS, home page"><img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="139" height="54"></a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="workflow.html">Workflow</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="citations.html">Citations</a></li>
+        <li><a class="nav-cta" href="download.html" aria-current="page">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- CHROME:HEADER:END -->
+<main id="main">
+<div class="page-hero"><div class="container"><p class="eyebrow">Get the software</p><h1>Download and install</h1><p>ER3DS is installed with pip from a single zip file, into an environment of its own that you can delete to uninstall.</p></div></div>
+
+<section>
+  <div class="container">
+    <div class="download-box">
+      <div class="download-main">
+        <h2>ER3DS <span data-release="version"></span></h2>
+        <p>The source zip of the program with its window, its command line and the C code that makes the registration fast. It is built on your computer during installation.</p>
+        <dl class="facts">
+          <div data-release-row="version" hidden><dt>Version</dt><dd data-release="version"></dd></div>
+          <div data-release-row="date" hidden><dt>Released</dt><dd data-release="date"></dd></div>
+          <div data-release-row="file" hidden><dt>File</dt><dd data-release="file"></dd></div>
+          <div data-release-row="size" hidden><dt>Size</dt><dd data-release="size"></dd></div>
+          <div data-release-row="sha256" hidden><dt>SHA-256</dt><dd class="mono" data-release="sha256"></dd></div>
+        </dl>
+        <div class="note" data-release-missing hidden><p><strong>The download is not set up yet.</strong> If you run this site: set your GitHub repository in <code>data/site.json</code> (see the README).</p></div>
+        <p style="margin:0"><a class="btn btn-primary" id="download-link" href="downloads/er3ds.zip" data-release-link="file" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg> Download er3ds.zip</a></p>
+        <p class="small" style="margin:1rem 0 0"><a href="downloads/ER3DS_manual.pdf" data-release-link="manual" style="color:#ffd2bd">Also: the manual (PDF<span data-release="manual-size" data-prefix=", "></span>)</a></p>
+        <p class="small" style="margin:.4rem 0 0"><a href="download.html" data-site="releases" style="color:#ffd2bd" hidden>All releases on GitHub</a></p>
+      </div>
+      <div class="card">
+        <h3>What you need</h3>
+        <ul class="checklist">
+          <li><strong>Python 3.9 or newer, with Tk</strong> (Tk draws the window).</li>
+          <li><strong>A C compiler</strong>, which builds the fast registration code. Without it the install still works, but slowly.</li>
+          <li><strong>Internet</strong> for the first install: pip downloads numpy, scipy, matplotlib and imageio-ffmpeg (the last brings the program that writes MP4 videos).</li>
+        </ul>
+        <p class="small muted" style="margin-top:1rem" data-release-row="sha256" hidden>You can check the download against the SHA-256 shown: <code>certutil -hashfile er3ds.zip SHA256</code> on Windows, <code>shasum -a 256 er3ds.zip</code> on macOS, <code>sha256sum er3ds.zip</code> on Linux.</p>
+      </div>
+    </div>
+    <div class="note blue">
+      <p><strong>Tested on:</strong> Linux with gcc. The Windows and macOS steps below are the standard ones for a pip install with a compiler, but have not yet been run by the program's author. <code>er3ds doctor</code> and <code>er3ds selftest</code> (below) tell you whether your installation works.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-soft" id="install">
+  <div class="container">
+    <div class="section-head">
+      <h2>Install</h2>
+      <p>Pick your system. You never need to &ldquo;activate&rdquo; the environment: the commands call the programs inside it directly.</p>
+    </div>
+    <div class="tabs" data-os-tabs>
+      <div role="tablist" aria-label="Operating system">
+        <button role="tab" id="tab-windows" aria-controls="panel-windows" aria-selected="true" data-os="windows" type="button">Windows</button>
+        <button role="tab" id="tab-macos" aria-controls="panel-macos" aria-selected="false" tabindex="-1" data-os="macos" type="button">macOS</button>
+        <button role="tab" id="tab-linux" aria-controls="panel-linux" aria-selected="false" tabindex="-1" data-os="linux" type="button">Linux</button>
+      </div>
+
+      <div role="tabpanel" id="panel-windows" aria-labelledby="tab-windows">
+        <h3>1. Install Python and a C compiler (once)</h3>
+        <ul>
+          <li><strong>Python with Tk:</strong> the installer from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>. It includes Tk; tick &ldquo;Add python.exe to PATH&rdquo;.</li>
+          <li><strong>C compiler:</strong> &ldquo;Build Tools for Visual Studio&rdquo; (free) with the &ldquo;Desktop development with C++&rdquo; workload. It is a large download.</li>
+        </ul>
+        <p>Check Python and Tk: <code>py --version</code>, and <code>py -c "import tkinter"</code> must print nothing.</p>
+        <h3>2. Install ER3DS</h3>
+        <p>Put <code>er3ds.zip</code> in a folder and open a terminal there (Command Prompt or PowerShell). Then:</p>
+        <div class="code"><pre><code>py -m venv er3ds-env
+er3ds-env\Scripts\python -m pip install er3ds.zip
+er3ds-env\Scripts\er3ds doctor
+er3ds-env\Scripts\er3ds gui</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>The last command opens the ER3DS window. The third checks the installation (see below).</p>
+      </div>
+
+      <div role="tabpanel" id="panel-macos" aria-labelledby="tab-macos" hidden>
+        <h3>1. Install Python and a C compiler (once)</h3>
+        <ul>
+          <li><strong>Python with Tk:</strong> the installer from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>. It includes a modern Tk; the Python that comes with macOS has an old one and looks wrong. Homebrew works too: <code>brew install python@3.12 python-tk@3.12</code>.</li>
+          <li><strong>C compiler:</strong> <code>xcode-select --install</code> (free, a few minutes).</li>
+        </ul>
+        <p>Check Python and Tk: <code>python3 --version</code>, and <code>python3 -c "import tkinter"</code> must print nothing.</p>
+        <h3>2. Install ER3DS</h3>
+        <p>Put <code>er3ds.zip</code> in a folder and open a terminal there. Then:</p>
+        <div class="code"><pre><code>python3 -m venv er3ds-env
+er3ds-env/bin/python -m pip install er3ds.zip
+er3ds-env/bin/er3ds doctor
+er3ds-env/bin/er3ds gui</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>The last command opens the ER3DS window. The third checks the installation (see below).</p>
+      </div>
+
+      <div role="tabpanel" id="panel-linux" aria-labelledby="tab-linux" hidden>
+        <h3>1. Install Python and a C compiler (once)</h3>
+        <div class="code"><pre><code>sudo apt install python3 python3-venv python3-tk build-essential</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>Other distributions: the same three things (Python 3 with venv and Tk, and a C compiler). Check Python and Tk: <code>python3 --version</code>, and <code>python3 -c "import tkinter"</code> must print nothing.</p>
+        <h3>2. Install ER3DS</h3>
+        <p>Put <code>er3ds.zip</code> in a folder and open a terminal there. Then:</p>
+        <div class="code"><pre><code>python3 -m venv er3ds-env
+er3ds-env/bin/python -m pip install er3ds.zip
+er3ds-env/bin/er3ds doctor
+er3ds-env/bin/er3ds gui</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>The last command opens the ER3DS window. The third checks the installation (see below).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container narrow">
+    <h2>Check that it works</h2>
+    <p>Run <code>er3ds doctor</code> (the third command above). Under &ldquo;Native C kernels&rdquo; it should say <code>status : loaded</code>, and <code>C vs NumPy kernels: agree</code>.</p>
+    <p>For a longer test, <code>er3ds selftest</code> runs a short end-to-end analysis of both surface types on synthetic meshes and ends with <code>RESULT: OK</code>.</p>
+
+    <h3>If something is not right</h3>
+    <details>
+      <summary>The doctor does not say &ldquo;loaded&rdquo;, or the registration is very slow</summary>
+      <p>The C compiler was not found. <strong>The install still succeeded</strong>, but the slow NumPy fallback is used, and the default Praun-Hoppe parameterization is not available (the first analysis stops with a message that says so; &ldquo;Tutte&rdquo; works). Install the compiler (see your system above) and reinstall:</p>
+      <div class="code"><pre><code>er3ds-env/bin/python -m pip install --force-reinstall --no-cache-dir er3ds.zip</code></pre><button class="copy" type="button">Copy</button></div>
+      <p>On Windows use <code>er3ds-env\Scripts\python</code>. <code>pip install -v er3ds.zip</code> shows the compiler's messages if something is still wrong.</p>
+    </details>
+    <details>
+      <summary><code>import tkinter</code> fails or prints an error</summary>
+      <p>Python was installed without Tk. On Linux install <code>python3-tk</code>; on Windows and macOS use the installer from python.org, which includes it.</p>
+    </details>
+    <details>
+      <summary>The window looks old-fashioned on macOS</summary>
+      <p>You are using the Python that comes with macOS, whose Tk is old. Install Python from python.org or with Homebrew (see the macOS tab).</p>
+    </details>
+
+    <h3>Everyday use</h3>
+    <ul>
+      <li><strong>The window:</strong> <code>er3ds gui</code> or <code>er3ds-gui</code>, from the <code>er3ds-env</code> folder as in the commands above (make a shortcut or an alias if you like). Your last choices are remembered in <code>.er3ds_gui.json</code> in your home folder.</li>
+      <li><strong>The command line</strong> does the same without a window: <code>er3ds --help</code> lists the commands, and the manual has the equivalent of every tab.</li>
+      <li><strong>Update:</strong> install the newer zip the same way with <code>--upgrade</code>: <code>er3ds-env/bin/python -m pip install --upgrade er3ds.zip</code>.</li>
+      <li><strong>Uninstall:</strong> delete the <code>er3ds-env</code> folder.</li>
+    </ul>
+
+    <h3>On a cluster (Slurm)</h3>
+    <p>A job on a cluster needs the program, not the window, so a Python without Tk is fine there. Load a Python and a compiler (on most clusters <code>module load python gcc</code>), create an environment and <code>pip install er3ds.zip</code> as above. The <em>Slurm Job</em> tab of the window, on the computer where you build the job, writes the job script. The manual explains it.</p>
+
+    <h3>Without a compiler</h3>
+    <p>Someone with a compiler can build a ready-made installation file (a &ldquo;wheel&rdquo;) once for each kind of computer with <code>python packaging/build_wheel.py</code> (included in the zip); the users of that file then need no compiler. A wheel works on the kind of computer it was built on.</p>
+
+    <p data-site-text="license_note" hidden class="muted small"></p>
+  </div>
+</section>
+
+</main>
+<!-- CHROME:FOOTER:START -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="113" height="44">
+        <p>Elastic registration and statistical shape analysis of 3D surfaces.</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="download.html">Download and install</a></li>
+          <li><a href="workflow.html">The workflow</a></li>
+          <li><a href="tutorials.html">Video tutorials</a></li>
+          <li><a href="citations.html">Citations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a href="downloads/ER3DS_manual.pdf" data-release-link="manual">Manual (PDF)</a></li>
+          <li><a href="download.html" data-site="github" hidden>Source on GitHub</a></li>
+          <li><a href="download.html" data-site="issues" hidden>Report a problem</a></li>
+          <li><a href="download.html" data-site="contact" hidden>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">&copy; <span data-year>2026</span> ER3DS. <span data-site-text="license_note" hidden></span></p>
+  </div>
+</footer>
+<!-- CHROME:FOOTER:END -->
+</body>
+</html>

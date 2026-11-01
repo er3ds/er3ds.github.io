@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The workflow: from meshes to statistics | ER3DS</title>
+<meta name="description" content="The steps of statistical shape analysis in ER3DS, from preprocessing and alignment to registration, principal components, clustering, regression, geodesics and videos, with pictures.">
+<meta name="theme-color" content="#0e2a63">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon_32.png">
+<link rel="apple-touch-icon" href="assets/img/icon_256.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The workflow: from meshes to statistics | ER3DS">
+<meta property="og:description" content="The steps of statistical shape analysis in ER3DS, from preprocessing and alignment to registration, principal components, clustering, regression, geodesics and videos, with pictures.">
+<meta property="og:url" content="https://er3ds.github.io/er3ds/workflow.html">
+<meta property="og:image" content="https://er3ds.github.io/er3ds/assets/img/og-image.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<!-- CHROME:HEADER:START -->
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="ER3DS, home page"><img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="139" height="54"></a>
+    <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="workflow.html" aria-current="page">Workflow</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="citations.html">Citations</a></li>
+        <li><a class="nav-cta" href="download.html">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- CHROME:HEADER:END -->
+<main id="main">
+<div class="page-hero"><div class="container"><p class="eyebrow">The workflow</p><h1>From meshes to statistics</h1><p>In ER3DS every step is a tab of the window. The first five tabs depend on the kind of surface; the tabs after them are shared by all kinds. This page walks through them, with pictures.</p></div></div>
+
+<section>
+  <div class="container narrow">
+    <h2>The idea in a few sentences</h2>
+    <p>To compare many shapes with statistics you first have to say which point on one shape corresponds to which point on every other. Finding that correspondence is called <strong>registration</strong>. ER3DS does it <em>elastically</em>: it allows the points to slide over the surface and the surface to stretch and bend, and it measures how different two shapes are after the best possible matching.</p>
+    <p>Once the shapes are in correspondence, <em>vertex k is the same location on every shape</em>. Every shape becomes a point in a space of shapes, and the usual tools apply: a mean, the main ways in which the shapes differ, groups, relations to other measurements, and change over time.</p>
+  </div>
+</section>
+
+<section class="section-soft">
+  <div class="container">
+    <p class="flow-label">The steps (tabs 1 to 5)</p>
+    <ol class="flow">
+      <li><a class="box" href="#step-1"><span class="n">1</span>Preprocessing</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="#step-2"><span class="n">2</span>Alignment</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="#step-3"><span class="n">3</span>Parameterization</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="#step-4"><span class="n">4</span>Registration</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box" href="#step-5"><span class="n">5</span>Register New Shapes</a></li>
+    </ol>
+    <p class="flow-label">Then, for every surface type</p>
+    <ol class="flow">
+      <li><a class="box shared" href="#step-6"><span class="n">6</span>PCA</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box shared" href="#step-7"><span class="n">7</span>Clustering, Regression, Time Models</a><span class="arrow" aria-hidden="true">&rarr;</span></li>
+      <li><a class="box shared" href="#step-8"><span class="n">8</span>Geodesics and Videos</a></li>
+    </ol>
+    <p class="muted small" style="margin-top:1.2rem">Steps 1 to 5 are the numbered tabs of the window. Steps 6 to 8 group the tabs that follow them, which you can use in any order once there is a registration.</p>
+  </div>
+</section>
+
+<section id="surface-types">
+  <div class="container">
+    <div class="section-head">
+      <h2>First: which kind of surface?</h2>
+      <p>Count the handles of your meshes. A mesh without any tunnel through it (a ball, a tooth, a bone without a canal) is genus 0; one tunnel (a ring, a vertebra with its spinal canal) is genus 1. Do not mix meshes of different genus in one analysis: the Preprocessing step reports the topology of every mesh and skips one of the wrong type, with the reason.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Type</th><th scope="col">Your meshes</th><th scope="col">Chart (step 3)</th><th scope="col">Registration (step 4)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Genus 0</th><td>closed, no handle (most teeth, many bones)</td><td>sphere</td><td>elastic SRNF, or elastic-varifold</td></tr>
+          <tr><th scope="row">Genus 1</th><td>closed, exactly one handle (a ring, a vertebra)</td><td>flat torus</td><td>elastic SRNF, or elastic-varifold</td></tr>
+          <tr><th scope="row">Disk</th><td>open, one boundary, no handle (a face, a tooth cut flat)</td><td>disk</td><td>elastic SRNF on the disk</td></tr>
+          <tr><th scope="row">Any surface</th><td>anything else: several boundaries, several pieces, several handles</td><td>none: nothing is parameterized</td><td>elastic-varifold</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section-soft">
+  <div class="container">
+    <ol class="steps">
+
+      <li class="step" id="step-1">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h2>Preprocessing <span class="pill tag">Tab 1</span></h2>
+        <div class="step-body">
+          <div>
+            <p>The analysis needs closed meshes of the right genus. This step checks every mesh and repairs what can be repaired. For genus 0 it tries, in order and only while the mesh is not yet genus 0: closing holes, cutting and capping handles, Poisson surface reconstruction and, as a last resort, volumetric closing (which can change the shape). Each repair can be switched off, and the mesh is finally simplified.</p>
+            <p class="where"><strong>Good to know:</strong> your files are never changed; the cleaned meshes go to a new folder. For disks the step closes small holes and removes handles, and for &ldquo;Any surface&rdquo; it is deliberately minimal.</p>
+          </div>
+          <figure class="figure"><img src="assets/img/step-preprocess.svg" width="480" height="260" loading="lazy" alt="A mesh with a hole, drawn as a blue triangle mesh with a dashed orange ring around the hole, and an arrow to the same mesh without the hole."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). A mesh with a hole becomes a clean closed mesh.</figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-2">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h2>Alignment <span class="pill tag">Tab 2</span></h2>
+        <div class="step-body">
+          <div>
+            <p>Puts the meshes in one frame so that they can be compared. It always does two things:</p>
+            <ul>
+              <li><strong>Centering:</strong> the centroid of the surface of every mesh becomes the origin. Only a translation: sizes and orientations are untouched.</li>
+              <li><strong>One pose:</strong> every mesh is rotated into the pose of the most central mesh, and the remaining distance to it is reported (a warning above 35&nbsp;% of the size).</li>
+            </ul>
+            <p>Optionally, <strong>mirror images</strong> (a left tooth among right teeth) are reflected to match the first mesh; this is off unless you ask for it. Nothing is repaired and nothing is rescaled.</p>
+            <p class="where"><strong>Good to know:</strong> the Parameterization (and, for any surface, the Registration) reads the aligned meshes and nothing else, so this step comes first.</p>
+          </div>
+          <figure class="figure"><img src="assets/img/step-align.svg" width="480" height="260" loading="lazy" alt="Three copies of the same bean-shaped mesh in different positions and orientations on the left, and on the right the three copies lying on top of each other in one common pose, with an orange cross at their common center."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). Different positions and poses become one common pose.</figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-3">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h2>Parameterization <span class="pill tag">Tab 3</span> <span class="pill orange tag">not for &ldquo;Any surface&rdquo;</span></h2>
+        <div class="step-body">
+          <div>
+            <p>Every mesh is mapped onto a standard domain, a sphere for genus 0, a flat torus for genus 1 and a disk for disks, and sampled on a regular grid. All shapes then share one grid, which is what makes the registration possible.</p>
+            <p>This is the slow step; the Registration continues from its result, so you can register again with other settings without repeating it.</p>
+          </div>
+          <figure class="figure"><img src="assets/img/step-parameterize.svg" width="480" height="262" loading="lazy" alt="A blue mesh with an arrow to three charts: a sphere with meridians and parallels labeled genus 0, a flat torus labeled genus 1, and a disk with polar grid lines. A note says that for any surface no chart is needed."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). A mesh is mapped onto a sphere, a flat torus or a disk, depending on its kind.</figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-4">
+        <span class="step-num" aria-hidden="true">4</span>
+        <h2>Registration <span class="pill tag">Tab 4</span></h2>
+        <div class="step-body">
+          <div>
+            <p>Finds the correspondence, and with it the mean shape. The <strong>elastic SRNF registration</strong> (the default) moves the points of every shape over its surface (all smooth re-labelings) and rotates it so as to minimize the distance to the mean between the square-root normal fields (SRNF) of the surfaces: stretching and bending are accounted for.</p>
+            <p>The <strong>elastic-varifold registration</strong> matches the meshes themselves. It is the method for &ldquo;Any surface&rdquo; and an alternative for genus 0 and genus 1.</p>
+            <p class="where"><strong>Result:</strong> registered meshes with the same vertices on every shape, the mean shape, and the distance of every shape to it.</p>
+          </div>
+          <figure class="figure"><a class="zoom" href="assets/img/figures/registration-before-after.png" aria-label="Open this figure at full size"><img src="assets/img/figures/registration-before-after.png" width="847" height="803" loading="lazy" alt="Three vertebra meshes in three rows. The left column shows the mean shape in grey. The middle column shows each vertebra before registration colored by its difference from the mean, with large differences in dark red and purple. The right column shows the same vertebrae after registration, almost uniformly pale, so they now match the mean closely."></a><figcaption><strong>Real output</strong> for three vertebrae: each shape against the mean (left), before registration (middle, best rotation only) and after (right). Color is the local difference to the mean. The distance falls from 0.44, 1.36 and 1.26 to 0.34, 0.34 and 0.33. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-5">
+        <span class="step-num" aria-hidden="true">5</span>
+        <h2>Register New Shapes <span class="pill tag">Tab 5</span></h2>
+        <div class="step-body">
+          <div>
+            <p>New specimens arrive after an analysis. Instead of redoing everything (which would change the mean and every correspondence), each new mesh is registered on its own to the <em>given</em> mean, placed in the model&rsquo;s PCA and saved with the model&rsquo;s vertex numbering, so it can be viewed and compared with the old shapes.</p>
+            <p class="where"><strong>Good to know:</strong> the new shapes never change the mean or the other shapes.</p>
+          </div>
+          <figure class="figure"><a class="zoom" href="assets/img/figures/new-shapes-in-model.png" aria-label="Open this figure at full size"><img src="assets/img/figures/new-shapes-in-model.png" width="1026" height="424" loading="lazy" alt="Two plots. On the left, the scores of three model shapes and one new shape, shown as an orange diamond, on the first two principal components. On the right, the distance to the mean shape of the model shapes and of the new shape, with a dashed line at the largest distance in the model."></a><figcaption><strong>Real output:</strong> the shapes of the model (blue) and a &ldquo;new&rdquo; shape (orange diamond) on the first two principal components (left), and their distances to the mean (right). Here the new shape is one of the model&rsquo;s own vertebrae with its pose scrambled, which must land on its own coordinates: a consistency check, not a new specimen. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-6">
+        <span class="step-num shared" aria-hidden="true">6</span>
+        <h2>PCA <span class="pill orange tag">Shared tab</span></h2>
+        <div class="step-body single">
+          <div>
+            <p>The principal component analysis of the registered shapes, without registering anything again: how much of the variation each component explains, the shapes along each component from &minus;2 to +2 standard deviations, and the score of every specimen. It runs in seconds, so you can try other settings and compare.</p>
+            <p>Two spaces are offered: <strong>SRNF space</strong> (a tangent PCA at the mean; the modes are turned into surfaces by SRNF inversion) and <strong>shape space</strong> (PCA of the registered shapes themselves).</p>
+          </div>
+          <div class="grid grid-2">
+            <figure class="figure"><a class="zoom" href="assets/img/figures/principal-modes.png" aria-label="Open this figure at full size"><img src="assets/img/figures/principal-modes.png" width="1211" height="454" loading="lazy" alt="Two rows of five vertebra shapes, each row one principal component from minus two standard deviations through the mean to plus two, colored by displacement along the surface normal."></a><figcaption><strong>Real output:</strong> the first two modes of variation of the three vertebrae, colored by the displacement along the surface normal. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+            <figure class="figure"><a class="zoom" href="assets/img/figures/scree-plot.png" aria-label="Open this figure at full size"><img src="assets/img/figures/scree-plot.png" width="605" height="396" loading="lazy" alt="A bar chart of the percentage of variance explained by each of seven principal components, falling from about 40 percent for the first, with a red line for the cumulative percentage rising towards 100 percent."></a><figcaption><strong>Real output</strong> for the synthetic example that comes with the program: the variance explained by each component (bars) and the cumulative total (line). <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+
+      <li class="step" id="step-7">
+        <span class="step-num shared" aria-hidden="true">7</span>
+        <h2>Ask questions of the shapes <span class="pill orange tag">Shared tabs</span></h2>
+        <div class="step-body single">
+          <div class="grid grid-3">
+            <div class="card"><h3>Shape Clustering</h3><p>Groups the shapes by their shape, with no labels needed: which shapes look alike, how many kinds there are, and which shape represents each kind. Seven methods, from hierarchical clustering to Gaussian mixtures. A table of known classes can be compared with the result.</p></div>
+            <div class="card"><h3>Shape Regression</h3><p>Relates the shapes to numbers in a table. <em>Scalar on shape</em> predicts a measurement or a group (two values) from the first principal components; <em>shape on scalar</em> shows how the shape changes with a measurement.</p></div>
+            <div class="card"><h3>Time Models</h3><p>Follows the shape over time or age: a time trend, and, if enough subjects have several shapes each, a longitudinal model. It reports how well the model fits.</p></div>
+          </div>
+          <figure class="figure"><a class="zoom" href="assets/img/figures/regression-direction.png" aria-label="Open this figure at full size"><img src="assets/img/figures/regression-direction.png" width="1217" height="262" loading="lazy" alt="Five views of a torus-shaped surface at minus two, minus one, zero, plus one and plus two standard deviations along the direction that predicts a response, colored by displacement from the mean shape, from blue for inward to red for outward. Each view states its predicted response value."></a><figcaption><strong>Real output</strong> of Shape Regression for synthetic bumpy tori (16 shapes, with a response that depends on the shape): the shapes along the direction that predicts the response, with the predicted value of each. Color is the displacement from the mean along the normal. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+        </div>
+      </li>
+
+      <li class="step" id="step-8">
+        <span class="step-num shared" aria-hidden="true">8</span>
+        <h2>Compare and show <span class="pill orange tag">Shared tabs</span></h2>
+        <div class="step-body single">
+          <div>
+            <p><strong>Geodesics</strong> compute the shortest path of shapes between two registered specimens: the first, the last and the shapes in between, all in correspondence. <strong>Videos/GIFs/Images</strong> save the principal deformation of the mean along one or several components, a turntable of the mean or of a specimen, and paths between shapes, as MP4, GIF or images.</p>
+          </div>
+          <figure class="figure"><a class="zoom" href="assets/img/figures/geodesic-paths-molars.png" aria-label="Open this figure at full size"><img src="assets/img/figures/geodesic-paths-molars.png" width="1500" height="651" loading="lazy" alt="Rows of seven molar tooth shapes along paths from the first to the last shape. The top two rows compare the geodesic path in SRNF space with a straight line in shape space for two PC1-extreme teeth; the bottom two rows show the two mean shapes computed in SRNF space and in shape space."></a><figcaption><strong>Real output:</strong> paths between two of 17 baboon molars (top two rows: the SRNF geodesic and a straight line in shape space) and the two means (bottom two rows). <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="container narrow center">
+    <h2>Ready to try it?</h2>
+    <p class="muted">Install ER3DS and follow the first run in the manual, step by step.</p>
+    <p><a class="btn btn-primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg> Download and install</a> &nbsp; <a class="btn btn-outline" href="downloads/ER3DS_manual.pdf" data-release-link="manual">Open the manual (PDF)</a></p>
+  </div>
+</section>
+
+</main>
+<!-- CHROME:FOOTER:START -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <img src="assets/img/ER3DS_logo_lockup_dark.svg" alt="ER3DS" width="113" height="44">
+        <p>Elastic registration and statistical shape analysis of 3D surfaces.</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="download.html">Download and install</a></li>
+          <li><a href="workflow.html">The workflow</a></li>
+          <li><a href="tutorials.html">Video tutorials</a></li>
+          <li><a href="citations.html">Citations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a href="downloads/ER3DS_manual.pdf" data-release-link="manual">Manual (PDF)</a></li>
+          <li><a href="download.html" data-site="github" hidden>Source on GitHub</a></li>
+          <li><a href="download.html" data-site="issues" hidden>Report a problem</a></li>
+          <li><a href="download.html" data-site="contact" hidden>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">&copy; <span data-year>2026</span> ER3DS. <span data-site-text="license_note" hidden></span></p>
+  </div>
+</footer>
+<!-- CHROME:FOOTER:END -->
+</body>
+</html>
