@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ER3DS: elastic registration and shape statistics for 3D surfaces</title>
+<title>ER3DS: Elastic Registration for 3D Surfaces</title>
 <meta name="description" content="ER3DS registers sets of 3D surfaces with elastic methods and computes the mean shape, principal components, clusters, regressions, geodesics and videos. Download, install and learn the workflow.">
 <meta name="theme-color" content="#0e2a63">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon_32.png">
 <link rel="apple-touch-icon" href="assets/img/icon_256.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ER3DS: elastic registration and shape statistics for 3D surfaces">
+<meta property="og:title" content="ER3DS: Elastic Registration for 3D Surfaces">
 <meta property="og:description" content="ER3DS registers sets of 3D surfaces with elastic methods and computes the mean shape, principal components, clusters, regressions, geodesics and videos. Download, install and learn the workflow.">
 <meta property="og:url" content="https://er3ds.github.io/er3ds/">
 <meta property="og:image" content="https://er3ds.github.io/er3ds/assets/img/og-image.png">
@@ -42,7 +42,7 @@
   <div class="container">
     <p class="eyebrow">Software for statistical shape analysis</p>
     <h1>Elastic registration and <span class="accent">shape statistics</span> for 3D surfaces</h1>
-    <p class="lead">ER3DS finds, for every surface in a set, the point-to-point correspondence with all the others. With that correspondence it computes the mean shape, the principal ways in which the shapes vary, clusters, regressions, time trends, and paths and videos between shapes. One window for the whole workflow, and the same engine on the command line.  Please Note: This Website is still under development. Any questions can be directed to nith.sivakanthan@gmail.com.</p>
+    <p class="lead">ER3DS finds, for every surface in a set, the point-to-point correspondence with all the others. With that correspondence it computes the mean shape, the principal ways in which the shapes vary, clusters, regressions, time trends, and paths between shapes. One window for the whole workflow, and the same engine on the command line.  Please Note: This Website is still under development. Any questions can be directed to nith.sivakanthan@gmail.com.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="download.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg> Download ER3DS <small data-release="version"></small></a>
       <a class="btn btn-light" href="workflow.html">See the workflow</a>
@@ -61,7 +61,7 @@
       <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="3.6" ry="9"/></svg></div><h3>Genus 0</h3><p>Closed surfaces without a handle: most teeth, many bones. Each mesh is mapped to a sphere.</p></a>
       <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6.5"/><ellipse cx="12" cy="12.6" rx="4.2" ry="2"/></svg></div><h3>Genus 1</h3><p>Closed surfaces with exactly one handle: a ring, a vertebra with its spinal canal. Mapped to a flat torus.</p></a>
       <a class="card" href="workflow.html#surface-types"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v18M3 12h18"/></svg></div><h3>Disk</h3><p>Open surfaces with one boundary and no handle: a face, a tooth cut flat. Mapped to a disk.</p></a>
-      <a class="card" href="workflow.html#surface-types"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-2-3 0-8 5-8 2 0 3 1 5 1 3 0 5 2 4 5-1 4-5 6-8 5-3-1-4-2-6-3z"/><circle cx="14" cy="12" r="1.8"/></svg></div><h3>Any surface</h3><p>Everything else: several boundaries, several pieces, several handles. Nothing is parameterized.</p></a>
+      <a class="card" href="workflow.html#surface-types"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-2-3 0-8 5-8 2 0 3 1 5 1 3 0 5 2 4 5-1 4-5 6-8 5-3-1-4-2-6-3z"/><circle cx="14" cy="12" r="1.8"/></svg></div><h3>Any surface</h3><p>Any Surface using varifold distances. Nothing is parameterized.</p></a>
     </div>
   </div>
 </section>
@@ -70,7 +70,7 @@
   <div class="container">
     <div class="section-head">
       <h2>From a folder of meshes to statistics</h2>
-      <p>The first five tabs of the window are the steps that depend on the surface type. Once the shapes are registered, the remaining tabs work the same for every type.</p>
+      <p>The first five tabs of the window are the steps that depend on the surface type. Once the shapes are registered, the remaining tabs perform statistical analysis and help visualize results.</p>
     </div>
     <p class="flow-label">The steps (tabs 1 to 5)</p>
     <ol class="flow">
@@ -99,12 +99,12 @@
       <h2>What you get</h2>
     </div>
     <div class="grid grid-4">
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div><h3>Meshes in correspondence</h3><p>Registered meshes (PLY or OBJ, colored) in which vertex <em>k</em> is the same location on every shape, and the mean shape.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M8 16l4-5 3 3 5-7"/></svg></div><h3>Statistics</h3><p>Principal components, distances to the mean, clustering with several methods, regression of shape on a measurement or the reverse, and time models.</p></div>
-      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6h9.2M6 8.2l5 7.6M18 8.2l-5 7.6"/></svg></div><h3>Figures and tables</h3><p>PNG figures and CSV tables for every step, and the results as NumPy arrays for your own scripts.</p></div>
-      <div class="card"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></div><h3>Paths and videos</h3><p>The shortest path between two shapes, and videos, GIFs and images of the modes of variation and of the paths.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div><h3>Meshes in correspondence</h3><p>Registered meshes in which vertices correspond across a sample of shapes.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M8 16l4-5 3 3 5-7"/></svg></div><h3>Statistics</h3><p>Principal components analysis, clustering with several methods, regression/classification using shape, and time models.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.4 6h9.2M6 8.2l5 7.6M18 8.2l-5 7.6"/></svg></div><h3>Figures and tables</h3><p>Figures and tables documenting every step, and the results as NumPy arrays convenitent for your own scripts.</p></div>
+      <div class="card"><div class="icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></div><h3>Visualization</h3><p>Built-in visualization of mesh outputs, geodesic paths between shapes, and image/gif/video creation for presentation.</p></div>
     </div>
-    <p class="muted small" style="margin-top:1.2rem">Everything runs on your own computer. Your meshes are never modified: the results go into a separate <code>er3ds_output</code> folder, which by default is inside your meshes folder and can be placed anywhere you choose.</p>
+    <!-- <p class="muted small" style="margin-top:1.2rem">Everything runs on your own computer. Your meshes are never modified: the results go into a separate <code>er3ds_output</code> folder, which by default is inside your meshes folder and can be placed anywhere you choose.</p> -->
   </div>
 </section>
 
