@@ -141,7 +141,25 @@
             <p>The <strong>elastic-varifold registration</strong> matches the meshes themselves. It is the method for &ldquo;Any surface&rdquo; and an alternative for genus 0 and genus 1.</p>
             <p class="where"><strong>Result:</strong> registered meshes with the same vertices on every shape, the mean shape, and the distance of every shape to it.</p>
           </div>
-          <figure class="figure"><a class="zoom" href="assets/img/figures/registration-before-after.png" aria-label="Open this figure at full size"><img src="assets/img/figures/registration-before-after.png" width="847" height="803" loading="lazy" alt="Three vertebra meshes in three rows. The left column shows the mean shape in grey. The middle column shows each vertebra before registration colored by its difference from the mean, with large differences in dark red and purple. The right column shows the same vertebrae after registration, almost uniformly pale, so they now match the mean closely."></a><figcaption><strong>Real output</strong> for three vertebrae: each shape against the mean (left), before registration (middle, best rotation only) and after (right). Color is the local difference to the mean. The distance falls from 0.44, 1.36 and 1.26 to 0.34, 0.34 and 0.33. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+          <figure class="figure">
+            <video
+              controls
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              width="847"
+              style="width: 100%; height: auto; border-radius: 8px;"
+            >
+              <source src="videos/geodesic_2640780391_vertebra44_to_1396013657_vertebra41.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>
+              <strong>Real output from RSNA LumbarDISC dataset</strong> Elastic Geodesic between a L4 Vertebra and a L1 Vertebra from two different subjects. Color is the difference from the starting L4 Vertebra.
+            </figcaption>
+          </figure>
+          <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/registration-before-after.png" aria-label="Open this figure at full size"><img src="assets/img/figures/registration-before-after.png" width="847" height="803" loading="lazy" alt="Three vertebra meshes in three rows. The left column shows the mean shape in grey. The middle column shows each vertebra before registration colored by its difference from the mean, with large differences in dark red and purple. The right column shows the same vertebrae after registration, almost uniformly pale, so they now match the mean closely."></a><figcaption><strong>Real output</strong> for three vertebrae: each shape against the mean (left), before registration (middle, best rotation only) and after (right). Color is the local difference to the mean. The distance falls from 0.44, 1.36 and 1.26 to 0.34, 0.34 and 0.33. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
         </div>
       </li>
 
@@ -153,7 +171,7 @@
             <p>New specimens arrive after an analysis. Instead of redoing everything (which would change the mean and every correspondence), each new mesh is registered on its own to the <em>given</em> mean, placed in the model&rsquo;s PCA and saved with the model&rsquo;s vertex numbering, so it can be viewed and compared with the old shapes.</p>
             <p class="where"><strong>Good to know:</strong> the new shapes never change the mean or the other shapes.</p>
           </div>
-          <figure class="figure"><a class="zoom" href="assets/img/figures/new-shapes-in-model.png" aria-label="Open this figure at full size"><img src="assets/img/figures/new-shapes-in-model.png" width="1026" height="424" loading="lazy" alt="Two plots. On the left, the scores of three model shapes and one new shape, shown as an orange diamond, on the first two principal components. On the right, the distance to the mean shape of the model shapes and of the new shape, with a dashed line at the largest distance in the model."></a><figcaption><strong>Real output:</strong> the shapes of the model (blue) and a &ldquo;new&rdquo; shape (orange diamond) on the first two principal components (left), and their distances to the mean (right). Here the new shape is one of the model&rsquo;s own vertebrae with its pose scrambled, which must land on its own coordinates: a consistency check, not a new specimen. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
+          <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/new-shapes-in-model.png" aria-label="Open this figure at full size"><img src="assets/img/figures/new-shapes-in-model.png" width="1026" height="424" loading="lazy" alt="Two plots. On the left, the scores of three model shapes and one new shape, shown as an orange diamond, on the first two principal components. On the right, the distance to the mean shape of the model shapes and of the new shape, with a dashed line at the largest distance in the model."></a><figcaption><strong>Real output:</strong> the shapes of the model (blue) and a &ldquo;new&rdquo; shape (orange diamond) on the first two principal components (left), and their distances to the mean (right). Here the new shape is one of the model&rsquo;s own vertebrae with its pose scrambled, which must land on its own coordinates: a consistency check, not a new specimen. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
         </div>
       </li>
 
