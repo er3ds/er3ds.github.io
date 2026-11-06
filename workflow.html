@@ -177,10 +177,28 @@
             <p>The principal component analysis of the registered shapes, without registering anything again: how much of the variation each component explains, the shapes along each component from &minus;2 to +2 standard deviations, and the score of every specimen. It runs in seconds, so you can try other settings and compare.</p>
             <p>Two spaces are offered: <strong>SRNF space</strong> (a tangent PCA at the mean; the modes are turned into surfaces by SRNF inversion) and <strong>shape space</strong> (PCA of the registered shapes themselves).</p>
           </div>
-          <div class="grid grid-2">
-            <figure class="figure"><a class="zoom" href="assets/img/figures/principal-modes.png" aria-label="Open this figure at full size"><img src="assets/img/figures/principal-modes.png" width="1211" height="454" loading="lazy" alt="Two rows of five vertebra shapes, each row one principal component from minus two standard deviations through the mean to plus two, colored by displacement along the surface normal."></a><figcaption><strong>Real output:</strong> the first two modes of variation of the three vertebrae, colored by the displacement along the surface normal. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
-            <figure class="figure"><a class="zoom" href="assets/img/figures/scree-plot.png" aria-label="Open this figure at full size"><img src="assets/img/figures/scree-plot.png" width="605" height="396" loading="lazy" alt="A bar chart of the percentage of variance explained by each of seven principal components, falling from about 40 percent for the first, with a red line for the cumulative percentage rising towards 100 percent."></a><figcaption><strong>Real output</strong> for the synthetic example that comes with the program: the variance explained by each component (bars) and the cumulative total (line). <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
-          </div>
+          <figure class="figure">
+            <video
+              controls
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              width="847"
+              style="width: 100%; height: auto; border-radius: 8px;"
+            >
+              <source src="videos/principal_deformation_PC1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>
+              <strong>Real output from RSNA LumbarDISC dataset</strong> First principal deformation of L1-L4 Vertebrae i.e. the direction of largest variance in shape across a sample of roughly 4000 vertebra. Color is the difference from the mean vertebra.
+            </figcaption>
+          </figure>
+          <!-- <div class="grid grid-2"> -->
+            <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/principal-modes.png" aria-label="Open this figure at full size"><img src="assets/img/figures/principal-modes.png" width="1211" height="454" loading="lazy" alt="Two rows of five vertebra shapes, each row one principal component from minus two standard deviations through the mean to plus two, colored by displacement along the surface normal."></a><figcaption><strong>Real output:</strong> the first two modes of variation of the three vertebrae, colored by the displacement along the surface normal. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
+            <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/scree-plot.png" aria-label="Open this figure at full size"><img src="assets/img/figures/scree-plot.png" width="605" height="396" loading="lazy" alt="A bar chart of the percentage of variance explained by each of seven principal components, falling from about 40 percent for the first, with a red line for the cumulative percentage rising towards 100 percent."></a><figcaption><strong>Real output</strong> for the synthetic example that comes with the program: the variance explained by each component (bars) and the cumulative total (line). <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
+          <!-- </div> -->
         </div>
       </li>
 
