@@ -97,7 +97,6 @@
         <div class="step-body">
           <div>
             <p>The analysis needs closed meshes of the right genus. This step checks every mesh and repairs what can be repaired. For genus 0 it tries, in order and only while the mesh is not yet genus 0: closing holes, cutting and capping handles, Poisson surface reconstruction and, as a last resort, volumetric closing (which can change the shape). Each repair can be switched off, and the mesh is finally simplified.</p>
-            <p class="where"><strong>Good to know:</strong> your files are never changed; the cleaned meshes go to a new folder. For disks the step closes small holes and removes handles, and for &ldquo;Any surface&rdquo; it is deliberately minimal.</p>
           </div>
           <figure class="figure"><img src="assets/img/step-preprocess.svg" width="480" height="260" loading="lazy" alt="A mesh with a hole, drawn as a blue triangle mesh with a dashed orange ring around the hole, and an arrow to the same mesh without the hole."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). A mesh with a hole becomes a clean closed mesh.</figcaption></figure>
         </div>
@@ -113,8 +112,6 @@
               <li><strong>Centering:</strong> the centroid of the surface of every mesh becomes the origin. Only a translation: sizes and orientations are untouched.</li>
               <li><strong>One pose:</strong> every mesh is rotated into the pose of the most central mesh, and the remaining distance to it is reported (a warning above 35&nbsp;% of the size).</li>
             </ul>
-            <p>Optionally, <strong>mirror images</strong> (a left tooth among right teeth) are reflected to match the first mesh; this is off unless you ask for it. Nothing is repaired and nothing is rescaled.</p>
-            <p class="where"><strong>Good to know:</strong> the Parameterization (and, for any surface, the Registration) reads the aligned meshes and nothing else, so this step comes first.</p>
           </div>
           <figure class="figure"><img src="assets/img/step-align.svg" width="480" height="260" loading="lazy" alt="Three copies of the same bean-shaped mesh in different positions and orientations on the left, and on the right the three copies lying on top of each other in one common pose, with an orange cross at their common center."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). Different positions and poses become one common pose.</figcaption></figure>
         </div>
@@ -126,7 +123,6 @@
         <div class="step-body">
           <div>
             <p>Every mesh is mapped onto a standard domain, a sphere for genus 0, a flat torus for genus 1 and a disk for disks, and sampled on a regular grid. All shapes then share one grid, which is what makes the registration possible.</p>
-            <p>This is the slow step; the Registration continues from its result, so you can register again with other settings without repeating it.</p>
           </div>
           <figure class="figure"><img src="assets/img/step-parameterize.svg" width="480" height="262" loading="lazy" alt="A blue mesh with an arrow to three charts: a sphere with meridians and parallels labeled genus 0, a flat torus labeled genus 1, and a disk with polar grid lines. A note says that for any surface no chart is needed."><figcaption><strong>Illustration</strong> (a drawing of the idea, not program output). A mesh is mapped onto a sphere, a flat torus or a disk, depending on its kind.</figcaption></figure>
         </div>
@@ -139,7 +135,6 @@
           <div>
             <p>Finds the correspondence, and with it the mean shape. The <strong>elastic SRNF registration</strong> (the default) moves the points of every shape over its surface (all smooth re-labelings) and rotates it so as to minimize the distance to the mean between the square-root normal fields (SRNF) of the surfaces: stretching and bending are accounted for.</p>
             <p>The <strong>elastic-varifold registration</strong> matches the meshes themselves. It is the method for &ldquo;Any surface&rdquo; and an alternative for genus 0 and genus 1.</p>
-            <p class="where"><strong>Result:</strong> registered meshes with the same vertices on every shape, the mean shape, and the distance of every shape to it.</p>
           </div>
           <figure class="figure">
             <video
@@ -163,7 +158,7 @@
         </div>
       </li>
 
-      <li class="step" id="step-5">
+      <!-- <li class="step" id="step-5">
         <span class="step-num" aria-hidden="true">5</span>
         <h2>Register New Shapes <span class="pill tag">Tab 5</span></h2>
         <div class="step-body">
@@ -173,7 +168,7 @@
           </div>
           <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/new-shapes-in-model.png" aria-label="Open this figure at full size"><img src="assets/img/figures/new-shapes-in-model.png" width="1026" height="424" loading="lazy" alt="Two plots. On the left, the scores of three model shapes and one new shape, shown as an orange diamond, on the first two principal components. On the right, the distance to the mean shape of the model shapes and of the new shape, with a dashed line at the largest distance in the model."></a><figcaption><strong>Real output:</strong> the shapes of the model (blue) and a &ldquo;new&rdquo; shape (orange diamond) on the first two principal components (left), and their distances to the mean (right). Here the new shape is one of the model&rsquo;s own vertebrae with its pose scrambled, which must land on its own coordinates: a consistency check, not a new specimen. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
         </div>
-      </li>
+      </li> -->
 
       <li class="step" id="step-6">
         <span class="step-num shared" aria-hidden="true">6</span>
@@ -221,7 +216,7 @@
         </div>
       </li>
 
-      <li class="step" id="step-8">
+      <!-- <li class="step" id="step-8">
         <span class="step-num shared" aria-hidden="true">8</span>
         <h2>Compare and show <span class="pill orange tag">Shared tabs</span></h2>
         <div class="step-body single">
@@ -230,7 +225,7 @@
           </div>
           <figure class="figure"><a class="zoom" href="assets/img/figures/geodesic-paths-molars.png" aria-label="Open this figure at full size"><img src="assets/img/figures/geodesic-paths-molars.png" width="1500" height="651" loading="lazy" alt="Rows of seven molar tooth shapes along paths from the first to the last shape. The top two rows compare the geodesic path in SRNF space with a straight line in shape space for two PC1-extreme teeth; the bottom two rows show the two mean shapes computed in SRNF space and in shape space."></a><figcaption><strong>Real output:</strong> paths between two of 17 baboon molars (top two rows: the SRNF geodesic and a straight line in shape space) and the two means (bottom two rows). <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure>
         </div>
-      </li>
+      </li> -->
     </ol>
   </div>
 </section>
