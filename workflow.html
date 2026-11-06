@@ -93,7 +93,7 @@
 
       <li class="step" id="step-1">
         <span class="step-num" aria-hidden="true">1</span>
-        <h2>Preprocessing <span class="pill tag">Tab 1</span></h2>
+        <h2>Preprocessing </h2>
         <div class="step-body">
           <div>
             <p>The analysis needs closed meshes of the right genus. This step checks every mesh and repairs what can be repaired. For genus 0 it tries, in order and only while the mesh is not yet genus 0: closing holes, cutting and capping handles, Poisson surface reconstruction and, as a last resort, volumetric closing (which can change the shape). Each repair can be switched off, and the mesh is finally simplified.</p>
@@ -104,7 +104,7 @@
 
       <li class="step" id="step-2">
         <span class="step-num" aria-hidden="true">2</span>
-        <h2>Alignment <span class="pill tag">Tab 2</span></h2>
+        <h2>Alignment </h2>
         <div class="step-body">
           <div>
             <p>Puts the meshes in one frame so that they can be compared. It always does two things:</p>
@@ -119,7 +119,7 @@
 
       <li class="step" id="step-3">
         <span class="step-num" aria-hidden="true">3</span>
-        <h2>Parameterization <span class="pill tag">Tab 3</span> <span class="pill orange tag">not for &ldquo;Any surface&rdquo;</span></h2>
+        <h2>Parameterization </h2>
         <div class="step-body">
           <div>
             <p>Every mesh is mapped onto a standard domain, a sphere for genus 0, a flat torus for genus 1 and a disk for disks, and sampled on a regular grid. All shapes then share one grid, which is what makes the registration possible.</p>
@@ -130,7 +130,7 @@
 
       <li class="step" id="step-4">
         <span class="step-num" aria-hidden="true">4</span>
-        <h2>Registration <span class="pill tag">Tab 4</span></h2>
+        <h2>Registration </h2>
         <div class="step-body">
           <div>
             <p>Finds the correspondence, and with it the mean shape. The <strong>elastic SRNF registration</strong> (the default) moves the points of every shape over its surface (all smooth re-labelings) and rotates it so as to minimize the distance to the mean between the square-root normal fields (SRNF) of the surfaces: stretching and bending are accounted for.</p>
@@ -171,11 +171,10 @@
 
       <li class="step" id="step-5">
         <span class="step-num shared" aria-hidden="true">6</span>
-        <h2>PCA <span class="pill orange tag">Shared tab</span></h2>
+        <h2>Principal Compoenent Analysis (PCA) </h2>
         <div class="step-body">
           <div>
-            <p>The principal component analysis of the registered shapes, without registering anything again: how much of the variation each component explains, the shapes along each component from &minus;2 to +2 standard deviations, and the score of every specimen. It runs in seconds, so you can try other settings and compare.</p>
-            <p>Two spaces are offered: <strong>SRNF space</strong> (a tangent PCA at the mean; the modes are turned into surfaces by SRNF inversion) and <strong>shape space</strong> (PCA of the registered shapes themselves).</p>
+            <p>PCA of the registered shapes allows users to analyze shape deformations across sample data in order of largest to smallest variation and can be helpful for downstream statisical modeling.</p>
           </div>
           <figure class="figure">
             <video
@@ -204,12 +203,12 @@
 
       <li class="step" id="step-6">
         <span class="step-num shared" aria-hidden="true">7</span>
-        <h2>Ask questions of the shapes <span class="pill orange tag">Shared tabs</span></h2>
+        <h2>Statistical Shape Models </h2>
         <div class="step-body single">
           <div class="grid grid-3">
             <div class="card"><h3>Shape Clustering</h3><p>Groups the shapes by their shape, with no labels needed: which shapes look alike, how many kinds there are, and which shape represents each kind. Seven methods, from hierarchical clustering to Gaussian mixtures. A table of known classes can be compared with the result.</p></div>
             <div class="card"><h3>Shape Regression</h3><p>Relates the shapes to numbers in a table. <em>Scalar on shape</em> predicts a measurement or a group (two values) from the first principal components; <em>shape on scalar</em> shows how the shape changes with a measurement.</p></div>
-            <div class="card"><h3>Time Models</h3><p>Follows the shape over time or age: a time trend, and, if enough subjects have several shapes each, a longitudinal model. It reports how well the model fits.</p></div>
+            <div class="card"><h3>Time Models</h3><p>Model the shape over time: a time trend, and, if enough subjects have several shapes each, a longitudinal model. </p></div>
           </div>
           <figure class="figure">
             <video
@@ -226,7 +225,7 @@
               Your browser does not support the video tag.
             </video>
             <figcaption>
-              <strong>Real output from Primate Teeth data</strong> Interative 2D/3D clustering plot using Mode-based clustering Mode-based:</strong> <a href="#ref-deng2022">Deng et al. 2022a</a>, <a href="#ref-deng2022b">Deng et al. 2022b</a>.
+              <strong>Real output from Primate Teeth data</strong> Interative 2D/3D clustering plot using Mode-based clustering (Deng et al. 2022a, Deng et al. 2022b).
             </figcaption>
           </figure>
           <!-- <figure class="figure"><a class="zoom" href="assets/img/figures/regression-direction.png" aria-label="Open this figure at full size"><img src="assets/img/figures/regression-direction.png" width="1217" height="262" loading="lazy" alt="Five views of a torus-shaped surface at minus two, minus one, zero, plus one and plus two standard deviations along the direction that predicts a response, colored by displacement from the mean shape, from blue for inward to red for outward. Each view states its predicted response value."></a><figcaption><strong>Real output</strong> of Shape Regression for synthetic bumpy tori (16 shapes, with a response that depends on the shape): the shapes along the direction that predicts the response, with the predicted value of each. Color is the displacement from the mean along the normal. <span class="muted">(Click the picture for the full-size figure.)</span></figcaption></figure> -->
